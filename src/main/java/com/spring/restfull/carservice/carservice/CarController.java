@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +41,17 @@ public class CarController {
 				.path("/{id}").buildAndExpand(savedCar.getId()).toUri();
 		
 		return ResponseEntity.created(location).build();
+	}
+	
+	@DeleteMapping("/car/{id}")
+	public Object deleteById(@PathVariable int id) {
+		
+		Car car = CarDao.deleteByid(id);
+		if (car == null) {
+			throw new UserNotFoundException("id : " + id);
+		}
+		
+		return car;
 	}
 	
 }

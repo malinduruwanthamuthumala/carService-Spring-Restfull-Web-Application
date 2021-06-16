@@ -1,6 +1,7 @@
 package com.spring.restfull.carservice.carservice;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class CarDao {
@@ -36,5 +37,19 @@ public class CarDao {
 		return null;		
 	}
 
+	
+	public static Car deleteByid(int  id) {
+		Iterator<Car> carIterator = carList.iterator();  
+		
+		while(carIterator.hasNext()) {
+			Car car = carIterator.next();
+			if (car.getId() ==  id) {
+				carIterator.remove();
+				return car;
+			}
+		}
+		return null;
+		
+	}
 	
 }
